@@ -84,7 +84,7 @@ FUSE (Filesystem in Userspace) is an OS mechanism for unix-like OS that lets non
 
 ## License
 	Copyright (C) 2017 Wesley Wu jie1975.wu@gmail.com
-	This code is licensed under the The MIT License (MIT). Please see the LICENSE file that accompanies this project for the terms of use.
+	This code is licensed under the The MIT License (MIT). 
 	
 ## FeedBack
 	Your feedbacks are highly appreciated! :)
