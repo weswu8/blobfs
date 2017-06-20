@@ -71,6 +71,8 @@ FUSE (Filesystem in Userspace) is an OS mechanism for unix-like OS that lets non
 
 ## Limitation
 * Due to the overhead of fuse system, the performance will be expected slower than native file system. 
+* For the cp command, the blobfs will use read out - then write in to new blob mode. this will spent more time for large files/folders.
+* For the page blob, currently, blobfs doest not support the copy operation. it may casue file interruption.  
 
 ## Supported platforms
 -Linux : x86, x64
