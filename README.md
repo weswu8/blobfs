@@ -1,5 +1,6 @@
 BlobFs
 =====
+![blobfs demo](doc/blobfs-demo.gif)
 BlobFs is a distributed [FUSE](http://fuse.sourceforge.net) based file system backed by [Microsoft azure blob storage service](https://azure.microsoft.com/en-us/services/storage/blobs/). It allows you to mount the containers/blobs in the storage account as a Linux local folder. It support the cluster mode.
 
 ## Project Goals
@@ -59,6 +60,9 @@ Additionally, you should do these actions
 ### final.Start the blobfs service
     nohup java -jar uber-blobfs-0.0.1-SNAPSHOT.jar
 
+## Tips
+* the block blob is read only by default. marked with read only flag. e.g. r--r--r--
+* the append blob is marked with the read and write flat. e.g rw-rw-rw-
 
 ## Dependency
 FUSE (Filesystem in Userspace) is an OS mechanism for unix-like OS that lets non-privileged users create their own file systems without editing kernel code.
