@@ -22,7 +22,7 @@ The main goal of the project is to make azure storage service easy to use for Li
 
 This is the logical architecture of blobfs:
 
-![blobfs Logical Architecture](https://github.com/wesley1975/blobfs/doc/blobfs-arch.jpg)
+![blobfs Logical Architecture](doc/blobfs-arch.jpg)
 * Blobfs uses the blob leases to safe the write operation in the distributed environment, there is a dedicated thread to renew the lease automatically.
 * For each of the node, there is local cache in it’s memory, the cache will store the file attributes. Once the file is changed by the node, the node will send a message to the topic of the service bus. And then other nodes will receive the notification via the dedicated subscription of the topic.
 
