@@ -34,8 +34,8 @@ I strongly recommend to test and verify it in you environment before you use it.
 ### 2.Install blobfs without cluster mode enabled
 #### 2.1 get the azure account connection string, refer this [link](https://docs.microsoft.com/en-us/azure/storage/storage-create-storage-account)
 #### 2.2 Edit configuration file: 
-Open blobfs.conf
-change the setting of :
+	Open blobfs.conf
+	change the setting of :
     Storage_Connection_String = your-storage-account -connection-string
     blob_prefix = /  (e.g. /container1/folder1/)
     mount_point = /mnt/blobfs (make sure the path exists in you node)
@@ -46,8 +46,8 @@ Additionally, you should do these actions
 #### 3.1 Create a service bus topic. Refer this [link](https://docs.microsoft.com/en-us/azure/service-bus-messaging/service-bus-create-topics-subscriptions)
 #### 3.2 create a subscription for each of your node, refer this [link](https://docs.microsoft.com/en-us/azure/service-bus-messaging/service-bus-create-topics-subscriptions)
 #### 3.3 Edit configuration file:
-Open blobfs.conf, 
-change the setting of :
+	Open blobfs.conf, 
+	change the setting of :
     Storage_Connection_String = your-storage-account -connection-string
     blob_prefix = /  (e.g. /container1/folder1/) 
     mount_point = /mnt/blobfs (make sure the path exists in you node)
@@ -55,7 +55,7 @@ change the setting of :
     service_bus_connection_string = your-servicebus-connection-string
     service_bus_topic = your-blobfs-topic
     service_bus_subscription = subscription of the dedicated node
-You can modify other settings if needed
+	You can modify other settings if needed
 ### final.Start the blobfs service
     nohup java -jar uber-blobfs-0.0.1-SNAPSHOT.jar
 
