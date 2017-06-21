@@ -62,12 +62,12 @@ Additionally, you should do these actions
 
 ## Tips
 * the block blob is read only by default. marked with read only flag. e.g. r--r--r--
-* the append blob is marked with the read and write flat. e.g rw-rw-rw-
+* the append blob is marked with the read and write flag. e.g rw-rw-rw-
 
 ## Dependency
-FUSE (Filesystem in Userspace) is an OS mechanism for unix-like OS that lets non-privileged users create their own file systems without editing kernel code.
-[Java Native Runtime (JNR)](https://github.com/jnr/jnr-ffi) is high-performance Java API for binding native libraries and native memory.
-[jnr-fuse](https://github.com/SerCeMan/jnr-fuse) is FUSE implementation in Java using Java Native Runtime (JNR).
+* FUSE (Filesystem in Userspace) is an OS mechanism for unix-like OS that lets non-privileged users create their own file systems without editing kernel code.
+* [Java Native Runtime (JNR)](https://github.com/jnr/jnr-ffi) is high-performance Java API for binding native libraries and native memory.
+* [jnr-fuse](https://github.com/SerCeMan/jnr-fuse) is FUSE implementation in Java using Java Native Runtime (JNR).
 
 ## Limitation
 * Due to the overhead of fuse system, the performance will be expected slower than native file system. 
