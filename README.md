@@ -64,7 +64,7 @@ Additionally, you should do these actions
 * the append blob is marked with the read and write flag. e.g rw-rw-rw-
 
 ## Performance Test
-* simply do a dd testing
+* simply do a dd testing (single thread mode). 
 ![blobfs performance test](doc/blobfs-perf.gif)
 
 ## Dependency
