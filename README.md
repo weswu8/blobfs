@@ -30,7 +30,6 @@ This is the logical architecture of blobfs:
 ## installation
 I strongly recommend to test and verify it in you environment before you use it.
 ### 1.Install fuse
-    yum group install "Development Tools"
     yum install fuse fuse-devel
 ### 2.Install blobfs without cluster mode enabled
 #### 2.1 get the azure account connection string, refer this [link](https://docs.microsoft.com/en-us/azure/storage/storage-create-storage-account)
@@ -63,6 +62,10 @@ Additionally, you should do these actions
 ## Tips
 * the block blob is read only by default. marked with read only flag. e.g. r--r--r--
 * the append blob is marked with the read and write flag. e.g rw-rw-rw-
+
+## Performance Test
+* simply do a dd testing
+![blobfs performance test](doc/blobfs-perf.gif)
 
 ## Dependency
 * FUSE (Filesystem in Userspace) is an OS mechanism for unix-like OS that lets non-privileged users create their own file systems without editing kernel code.
