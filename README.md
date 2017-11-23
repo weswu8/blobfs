@@ -1,11 +1,11 @@
 BlobFs
 =====
 ![blobfs demo](doc/blobfs-demo.gif)
-BlobFs is a distributed [FUSE](http://fuse.sourceforge.net) based file system backed by [Microsoft azure blob storage service](https://azure.microsoft.com/en-us/services/storage/blobs/). It allows you to mount the containers/blobs in the storage account as a the local folder/driver. , no matter it is a Linux system or a Windows system. It support the cluster mode. you can mount the blob container (or part of it) across multiple linux and windows nodes.
+BlobFs is a distributed [FUSE](http://fuse.sourceforge.net) based file system backed by [Microsoft azure blob storage service](https://azure.microsoft.com/en-us/services/storage/blobs/). It allows you to mount the containers/blobs in the storage account as a the local folder/driver, no matter it is a Linux system or a Windows system. It support the cluster mode. you can mount the blob container (or part of it) across multiple linux and windows nodes.
 
 ## Important Notes:
 * Here is the linux/mac version of the blobfs, please find the windows version of the blobfs from [blobfs-win](https://github.com/wesley1975/blobfs-win).
-* For the core libraries of the blobfs, you can find it from the bloblib(https://github.com/wesley1975/bloblib). which is responsible for handling all the underlying azure blob storage operations
+* For the core libraries of the blobfs, you can find it from the [bloblib](https://github.com/wesley1975/bloblib). which is responsible for handling all the underlying azure blob storage operations
 * If you are interested in contributing, please contact me via jie1975.wu@gmail.com
 
 ## Project Goals
@@ -21,9 +21,9 @@ base on the lots of feedbacks, in version 0.0.3, I made these major updates:
 ## Features:
 * Implemented these fuse functions: getattr, readdir, open, release, read, flush, create, mkdir, rename, rmdir, unlink, truncate, write, symlink, readlink.
 * Allow mount multiple containers (or part of them) as the local folder.
-* Cluster enabled: It supports mount the same containers/blobs across multiple nodes. Theses files can be shared via these nodes. The caches of these nodes are synchronized via service bus.
+* Cluster enabled: It supports mount the same containers/blobs across multiple nodes. Theses files can be shared via these nodes. The caches of these nodes are synchronized via azure queue storage.
 * Use blob leases as the distributed locking mechanism across multiple nodes. The blob will be locked exclusively when it is written. 
-* File’s attribute is cached for better performance, the cache are synchronized via azure queuq storage.
+* File’s attribute is cached for better performance, the cache are synchronized via azure queue storage.
 * The contents are pre-cached by chunks when there is read operation. This will eliminate the times of http request and increase the performance greatly. 
 * Multi-part uploads are used for the write operation. Data is buffered firstly and then be uploaded if the buffer size exceed the threshold. This also can eliminate the times of http request and increase the performance greatly. 
 * You can edit the file content on the fly, especially recommend for the small file, It does not need download, edit and then upload.
@@ -41,9 +41,9 @@ This is the logical architecture of blobfs:
 
 ## installation
 Installation now is very easy. But I strongly recommend to test and verify it in you environment before you use it. it's at your own risk.
-### 1.Install fuse
+### 1. Install fuse
     yum install fuse fuse-devel
-### 2.Install blobfs
+### 2. Install blobfs
 #### 2.1 get the azure account connection string, refer this [link](https://docs.microsoft.com/en-us/azure/storage/storage-create-storage-account)
 #### 2.2 Edit configuration file: 
 	Open blobfs.conf
@@ -54,7 +54,7 @@ Installation now is very easy. But I strongly recommend to test and verify it in
     cluster_enabled = true
 the cluster mode is enabled by default, You can also modify other settings if needed
 
-### final.Start the blobfs service
+### final. Start the blobfs service
     nohup java -jar blobfs-0.0.3jar
 It is highly recommended that you should use [supervisord](http://supervisord.org/) to manage the blobfs services.
 
@@ -64,14 +64,20 @@ It is highly recommended that you should use [supervisord](http://supervisord.or
 
 ## How to create a append blob
 * CLI way
+
 	touch append.log	// this will create a empty block blob.
+	
 	echo 'new line here' >> append.log  
+	
 		//this will change the underlying block blob to append blob automatically. 
 		// you also can issue this command against a existing file, this also works, but the time depends on the size of the file.
 		
 * Programming way
+
 	FileWriter fw = new FileWriter("/mnt/blobfs/container1/append.log", true)  //java 1.7+
+	
 	applendFile = open("/mnt/blobfs/container1/append.log",' a+') //python
+	
 	...
 
 ## Performance Test
@@ -81,7 +87,7 @@ It is highly recommended that you should use [supervisord](http://supervisord.or
 ## Dependency
 * FUSE (Filesystem in Userspace) is an OS mechanism for unix-like OS that lets non-privileged users create their own file systems without editing kernel code.
 * [Java Native Runtime (JNR)](https://github.com/jnr/jnr-ffi) is high-performance Java API for binding native libraries and native memory.
-* [jnr-fuse](https://github.com/SerCeMan/jnr-fuse) is FUSE implementation in Java using Java Native Runtime (JNR).
+* [jnr-fuse](https://github.com/SerCeMan/jnr-fuse) is a great FUSE implementation in Java using Java Native Runtime (JNR).
 
 ## Limitation and known issues:
 * Due to the overhead of fuse system, the performance will be expected slower than native file system. 
@@ -89,9 +95,9 @@ It is highly recommended that you should use [supervisord](http://supervisord.or
 * For the page blob, currently, should be, but it is not well tested yet. it may casue file interruption.  
 
 ## Supported platforms
--Linux : x86, x64
--MacOS (via osxfuse): x86, x64  (should be, but not tested yet)
--windows: [blobfs-win](https://github.com/wesley1975/blobfs-win)
+* Linux : x86, x64
+* MacOS (via osxfuse): x86, x64  (should be, but not tested yet)
+* windows: [blobfs-win](https://github.com/wesley1975/blobfs-win)
 
 ## Command Line Usage
     blobfs  -h
