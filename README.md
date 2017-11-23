@@ -62,6 +62,7 @@ It is highly recommended that you should use [supervisord](http://supervisord.or
 * the block blob is read only by default. marked with read only flag. e.g. r--r--r--
 * the append blob is marked with the read and write flag. e.g rw-rw-rw-
 
+
 ## How to create a append blob
 * CLI way
 
