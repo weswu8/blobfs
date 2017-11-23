@@ -69,8 +69,8 @@ It is highly recommended that you should use [supervisord](http://supervisord.or
 	
 	echo 'new line here' >> append.log  
 	
-		//this will change the underlying block blob to append blob automatically. 
-		// you also can issue this command against a existing file, this also works, but the time depends on the size of the file.
+	--this will change the underlying block blob to append blob automatically. 
+	--you also can issue this command against a existing file, this also works, but the time depends on the size of the file.
 		
 * Programming way
 
