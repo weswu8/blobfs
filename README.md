@@ -13,6 +13,11 @@ Object storage is one of the most fundamental topic you'll encounter when you de
 
 ## Key Updates:
 
+### Bump the version to v1.1.0
+
+* Code Optimization
+* bug fixed
+
 ### Bump the version to v1.0.0
 
 * Optimize performance for large content reads and writes
@@ -68,8 +73,31 @@ Installation now is very easy. But I strongly recommend to test and verify it in
 the cluster mode is enabled by default, You can also modify other settings if needed
 
 ### final. Start the blobfs service
-    nohup java -jar blobfs-0.0.3jar
+	cd the_file_path
+    nohup java -jar blobfs-0.0.3jar &
 It is highly recommended that you should use [supervisord](http://supervisord.org/) to manage the blobfs services.
+### option. run blobfs as the system service
+	on ubuntu:
+	vi /usr/lib/systemd/system/blobfs.service
+	put below contents into it:
+	[Unit]
+	Description=Blobfs Daemon
+
+	[Service]
+	WorkingDirectory=/home/linuxadmin/blobfs-blobfs-v1.1.0/bin
+	ExecStart=/usr/bin/java -jar blobfs-1.1.0.jar
+	User=root
+
+	[Install]
+	WantedBy=multi-user.target
+	
+	and then, use these command to manage the service
+	$ systemctl start blobfs.service # starts the service
+	$ systemctl enable blobfs.service # auto starts the service
+	$ systemctl disable blobfs.service # stops autostart
+	$ systemctl stop blobfs.service # stops the service
+	$ systemctl restart blobfs.service # restarts the service
+
 
 ## Tips
 * the block blob is read only by default. marked with read only flag. e.g. r--r--r--
